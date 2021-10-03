@@ -11,6 +11,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 /*
@@ -19,6 +20,12 @@ import (
  * The function is expected to return a STRING.
  * The function accepts STRING s as parameter.
  */
+
+func timeConversionNew(s string) string {
+	t, _ := time.Parse("03:04:05PM", s)
+
+	return t.Format("15:04:05")
+}
 
 func timeConversion(s string) string {
 	// Write your code here
@@ -62,7 +69,8 @@ func main() {
 
 	s := readLine(reader)
 
-	result := timeConversion(s)
+	// result := timeConversion(s)
+	result := timeConversionNew(s)
 
 	fmt.Fprintf(writer, "%s\n", result)
 
