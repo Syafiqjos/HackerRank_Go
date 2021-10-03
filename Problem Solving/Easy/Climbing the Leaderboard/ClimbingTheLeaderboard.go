@@ -28,6 +28,40 @@ type Leaderboard struct {
 }
 
 func climbingLeaderboard(ranked []int32, player []int32) []int32 {
+	ldr := []int32{}
+
+	// Make Ranked Leaderboard
+
+	ldr = append(ldr, ranked[0])
+
+	for i := 1; i < len(ranked); i++ {
+		if ldr[len(ldr)-1] > ranked[i] {
+			ldr = append(ldr, ranked[i])
+		}
+	}
+
+	ldr = append(ldr, 0)
+
+	// Decide Player Rank
+
+	playerRank := []int32{}
+
+	rankIndex := int32(len(ldr) - 1)
+
+	for i := 0; i < len(player); i++ {
+		for rankIndex >= 0 && ldr[rankIndex] <= player[i] {
+			rankIndex--
+		}
+
+		playerRank = append(playerRank, rankIndex+2)
+	}
+
+	fmt.Println(ldr)
+
+	return playerRank
+}
+
+func climbingLeaderboardLegacy(ranked []int32, player []int32) []int32 {
 	// Write your code here
 
 	ldr := []Leaderboard{}
